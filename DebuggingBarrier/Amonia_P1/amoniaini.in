@@ -1,0 +1,12 @@
+include amoniaini.lattice
+include amoniaini.ionpos
+coords-type cartesian
+
+ion-species GBRV/$ID_pbe.uspp        #Replace $ID by any atom symbol to find a pseudopotential
+elec-cutoff 20 100                   #Recommended cutoffs for GBRV pseudopotentials
+dump End IonicPositions                        #Don't output anything for this example
+
+ionic-minimize \
+    nIterations 20 \
+    energyDiffThreshold 1e-6 \
+    knormThreshold 1e-4  #Threshold on RMS cartesian force
