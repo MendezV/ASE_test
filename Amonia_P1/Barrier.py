@@ -19,5 +19,5 @@ images.append(final)
 
 neb = NEB(images,k=0.05,parallel=True)
 neb.interpolate('idpp')
-qn = BFGS(neb, trajectory='neb2.traj')
-qn.run(fmax=0.05)
+qn = BFGS(neb, trajectory='neb4.traj')
+qn.run(fmax=0.1)

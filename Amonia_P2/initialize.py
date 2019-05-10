@@ -53,7 +53,7 @@ print([atom.tag for atom in Amo_fini],[atom.symbol for atom in Amo_fini],[atom.i
 
 
 #Set up JDFTx calculator
-calculator = JDFTx( executable='srun -n 1 -N 1 -c 12 --exclude=node[1001-1032]  /home/jfm343/JDFTXDIR/build/jdftx',pseudoDir='/home/jfm343/JDFTXDIR/build/pseudopotentials',pseudoSet='GBRV-pbe',commands={'elec-cutoff' : '20 100', 'elec-ex-corr' :'gga-PBEsol', 'spintype' : 'z-spin','elec-smearing' :'Fermi 0.01' })
+calculator = JDFTx( executable='srun -n 1 -N 1 -c 12 --exclude=node[1001-1032]  /home/jfm343/JDFTXDIR/build/jdftx',pseudoDir='/home/jfm343/JDFTXDIR/build/pseudopotentials',pseudoSet='GBRV-pbe',commands={'elec-cutoff' : '20 100', 'elec-ex-corr' :'gga-PBEsol', 'spintype' : 'z-spin','elec-smearing' :'Fermi 0.01' ,'core-overlap-check' :'None'})
 
 Amo_fini.set_calculator(calculator)
 Amo_fini.set_constraint(FixAtoms(indices=[0]))
