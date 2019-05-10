@@ -3,6 +3,7 @@ from ase.io import read
 from ase.constraints import FixAtoms
 from ase.neb import NEB
 from ase.optimize import BFGS,LBFGS
+import sys
 
 initial = read('initial.traj')
 final = read('final.traj')
@@ -17,7 +18,9 @@ for i in range(5):
 
 images.append(final)
 
-neb = NEB(images,k=0.05,parallel=True)
+
+kspr=float(sys.argv[1])
+neb = NEB(images,k=kspr,parallel=True)
 neb.interpolate('idpp')
-qn = BFGS(neb, trajectory='neb4.traj')
+qn = BFGS(neb, trajectory='neb4_k='+sys.argv[1]+'.traj')
 qn.run(fmax=0.1)
