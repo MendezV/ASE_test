@@ -17,7 +17,7 @@ for i in range(5):
 
 images.append(final)
 
-neb = NEB(images,k=0.05)
+neb = NEB(images,k=0.05,parallel=True)
 neb.interpolate()
 qn = BFGS(neb, trajectory='neb.traj')
 qn.run(fmax=0.5)
