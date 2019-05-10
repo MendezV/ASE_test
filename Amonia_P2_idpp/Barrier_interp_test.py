@@ -11,7 +11,7 @@ final = read('final.traj')
 images = [initial]
 for i in range(5):
     image = initial.copy()
-    image.set_calculator(JDFTx(executable='jdftx',pseudoDir='/Users/juanmendezvalderrama/Documents/JDFTX/jdftx-1.4.2/jdftx/pseudopotentials',pseudoSet='GBRV-pbe',commands={'elec-cutoff' : '20 100', 'elec-ex-corr' :'gga-PBEsol', 'spintype' : 'z-spin','elec-smearing' :'Fermi 0.01','core-overlap-check' :'None' }))
+    image.set_calculator(JDFTx( executable='srun -n 1 -N 1 -c 12 --exclude=node[1001-1032]  /home/jfm343/JDFTXDIR/build/jdftx',pseudoDir='/home/jfm343/JDFTXDIR/build/pseudopotentials',pseudoSet='GBRV-pbe',commands={'elec-cutoff' : '20 100', 'elec-ex-corr' :'gga-PBEsol', 'spintype' : 'z-spin','elec-smearing' :'Fermi 0.01' ,'core-overlap-check' :'None'}))
     images.append(image)
     image.set_constraint(FixAtoms(indices=[0])) ## so that beads are able to move in intermediate steps
 
@@ -19,5 +19,5 @@ images.append(final)
 
 neb = NEB(images,k=0.05,parallel=True)
 neb.interpolate('idpp')
-qn = BFGS(neb, trajectory='neb2.traj')
-qn.run(fmax=0.05)
+qn = BFGS(neb, trajectory='neb.traj')
+qn.run(fmax=0.5)

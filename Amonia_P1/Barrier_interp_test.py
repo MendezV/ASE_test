@@ -1,5 +1,5 @@
 from JDFTx import JDFTx
-from ase.io import read
+from ase.io import read, write
 from ase.constraints import FixAtoms
 from ase.neb import NEB
 from ase.optimize import BFGS,LBFGS
@@ -19,5 +19,8 @@ images.append(final)
 
 neb = NEB(images,k=0.05,parallel=True)
 neb.interpolate('idpp')
-qn = BFGS(neb, trajectory='neb2.traj')
-qn.run(fmax=0.05)
+write('neb_inter.traj',neb)
+'''
+qn = BFGS(neb, trajectory='neb.traj')
+qn.run(fmax=0.5)
+'''
